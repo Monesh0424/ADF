@@ -1,0 +1,47 @@
+Task: Copy data from  azure blob storage to azure blob storage
+
+
+Specifications:
+	source data storage  - Azure blob storage
+	Data File 		     - airlines.csv
+	sink  data storage   - azure blob storage
+
+Steps:
+	-> Make sure that Resource Group  is created
+	-> Make sure storage account is created. Since source and target  are same, 1 storage account will be sufficient.
+	-> And finally created ADF session.
+	
+	
+Definitions:
+1. Resource Group
+	->  A logical container in Azure that holds related resources for a solution.
+	->  Think of it like a folder where you keep all Azure services that belong to a project.
+	->  For example, if you create an Azure Data Factory, a Storage Account, and a Key Vault for a project, you might place them all inside one Resource Group.
+	->  It helps in organizing, managing, and controlling access to resources as a unit.
+	->  In ADF context: You put ADF, storage accounts, and other required services inside the same (or related) resource group to manage them together.
+
+2. Storage Account
+	-> An Azure service that provides cloud storage for data such as blobs, files, tables, and queues.
+	-> It’s the physical storage unit in Azure.
+	-> In ADF context: A storage account is often used as:
+	-> Source storage: Where raw input data resides.
+	-> Intermediate storage: For staging data during pipelines.
+	-> Target storage: Where processed/transformed data is stored.
+	-> Example: You connect ADF to an Azure Blob Storage account to read CSV files and load them into a database.
+
+3. Sink Storage Account
+	-> In ADF terminology, “Sink” means the destination (target) where data is written after processing.
+	-> A Sink Storage Account refers to the storage account used as the output target of a pipeline.
+	-> Example:
+	-> You copy data from an On-Premises SQL Database (source) → transform it in ADF → and load the final data into a Blob Container in a Sink Storage Account (destination).
+	-> So in short: Sink = Where the pipeline writes data.
+
+==============================================================================================================================
+⚡ Quick analogy:
+
+Resource Group = Project folder.
+
+Storage Account = Cloud storage service (like a hard drive in the cloud).
+
+Sink Storage Account = The specific storage account used as the "output destination" in an ADF pipeline.	
+
