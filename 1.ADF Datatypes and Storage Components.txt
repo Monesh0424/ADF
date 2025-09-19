@@ -1,0 +1,108 @@
+-> ADF is cloud based ETL Service used for data summarization , Data Integration and Data migration.
+
+-> We can perform ETL and ELT using ADF.
+           i)  We need source of data and target to achieve this.
+		   ii) Source can be websites , databases , log files ,  IoT , Flat files, live streaming etc
+		   
+-> Data we get from  above sources can be structured ,  semi  structured and unstructured.
+
+-> semi structured = XML , HTML , JSON
+
+-> Unstructured = Audio ,  Video files		   
+
+
+=========================================================================================================
+STORAGE COMPONENTS
+=========================================================================================================
+
+There are more than 90 storage services  in Azure.
+
+1) Azure Blob Storage
+	->  Purpose: Object storage for the cloud.
+	->  Data Types: Can store structured, semi-structured, and unstructured data (e.g., images, videos, documents, backups).
+	->  Use Cases: Data lakes, content storage and delivery, backups, disaster recovery.
+	->  Key Features: Supports hot, cool, and archive tiers for cost optimization depending on access frequency.
+
+2) Azure Data Lake Storage Gen2
+	-> Purpose: Combines features of Azure Blob Storage with a hierarchical file system.
+	-> Data Types: Stores structured, semi-structured, and unstructured data.
+	-> Use Cases: Big data analytics, large-scale data processing.
+	-> Key Features: Optimized for analytics workloads; supports Hadoop Distributed File System (HDFS) interface.
+
+3) Azure SQL Database
+	-> Purpose: Managed relational database service.
+	-> Data Types: Stores structured data.
+	-> Use Cases: OLTP (Online Transaction Processing) workloads, web and mobile applications.
+	-> Key Features: Fully managed, built-in intelligence, scalability, high availability, and security.
+
+4) Azure Cosmos DB
+	-> Purpose: Globally distributed, multi-model NoSQL database service.
+	-> Data Types: Can store structured and semi-structured data (e.g., JSON documents, key-value pairs, graph data).
+	-> Use Cases: IoT, gaming, web apps, real-time personalization.
+	-> Key Features: Multi-model API support (SQL, MongoDB, Cassandra, Gremlin, Table), low latency, and global distribution.
+
+5) Azure Elastic Pool (within Azure SQL Database)
+	->  Purpose: Allows multiple Azure SQL Databases to share resources.
+	->  Data Types: Stores structured data.
+	->  Use Cases: SaaS applications with many databases that have variable usage patterns.
+	->  Key Features: Cost-effective resource management, scalability.
+
+6) Azure Synapse Analytics
+	->  Purpose: Integrated analytics service combining big data and data warehousing.
+	->  Data Types: Primarily stores structured data.
+	->  Use Cases: Data warehousing, big data analytics, business intelligence.
+	->  Key Features: SQL pools (dedicated and serverless), integration with Spark, built-in data integration pipelines.
+	
+	
+================================================================
+ADF Components
+================================================================
+1. Pipeline
+	-> Definition: A pipeline is a logical grouping of activities that perform a unit of work.
+	-> Purpose: It orchestrates and automates the work flow by defining a series of steps to move and transform data.
+	-> Example: A pipeline could include copying data from an on-premises SQL Server to Azure Blob Storage, followed by running a data transformation.
+	-> Key Point: Think of a pipeline as a work flow or a process that contains activities executed in sequence or parallel.
+
+2. Linked Service
+	-> Definition: A linked service is a connection string that defines the connection information needed for Data Factory to connect to external resources.
+	-> Purpose: It acts like a bridge or connection to data sources or compute environments.
+	-> Example: Connecting to an Azure Blob Storage account, an Azure SQL Database, or an on-premises Oracle database requires defining a linked service.
+	-> Key Point: It’s similar to a connection configuration or credential.
+
+3. Datasets
+	-> Definition: Datasets represent the structure and location of data within linked services.
+	-> Purpose: They define the data you want to use or process, such as tables, files, folders, or collections.
+	-> Example: A dataset could specify a table in Azure SQL Database or a folder path in Azure Blob Storage.
+	-> Key Point: If a linked service is the connection, the dataset is the data itself within that connection.
+
+4. Activities
+	-> Definition: Activities are the individual steps or tasks within a pipeline.
+	-> Purpose: Each activity defines a specific action like copying data, running a SQL query, executing a stored procedure, or running a data transformation.
+	-> Types: data movement activities (e.g., Copy activity), 
+			  data transformation activities (e.g., Data Flow activity), 
+			  control activities (e.g., ForEach, If Condition).
+	-> Key Point: Activities are the building blocks of pipelines that perform actual work.
+
+5. Dataflows (Mapping Dataflows)
+	-> Definition: Dataflows are visually designed data transformation logic in Azure Data Factory or Synapse.
+	-> Purpose: They allow you to perform ETL/ELT transformations on data without writing code.
+	-> Example: You can perform operations like joins, aggregations, filters, and lookups using a drag-and-drop interface.
+	-> Key Point: Dataflows run on Spark clusters managed by Azure and handle large-scale data processing visually.
+
+6. Triggers
+	-> Definition: Triggers are used to automate the execution of pipelines.
+	-> Purpose: They initiate pipelines based on a schedule, event, or manual invocation.
+	-> Types:
+	        Schedule Trigger: Runs pipelines at specified times.
+	        Tumbling Window Trigger: Runs pipelines in periodic time windows.
+	        Event-Based Trigger: Starts pipelines when an event occurs (e.g., a new file arrives).
+	-> Key Point: Triggers help automate work flows without manual intervention.
+
+7. Integration Runtime (IR)
+	-> Definition: Integration Runtime is the compute infrastructure used by Azure Data Factory to provide data integration capabilities.
+	-> Purpose: It performs data movement, transformation, and dispatch activities.
+	-> Types:
+			Azure IR: Fully managed by Azure, used for cloud-based data movement and transformation.
+			Self-hosted IR: Installed on-premises or in a virtual network for accessing data sources behind firewalls.
+			Azure-SSIS IR: Used to run SQL Server Integration Services (SSIS) packages in the cloud.
+	-> Key Point: IR is the "engine" that runs your pipelines and activities securely and efficiently.
