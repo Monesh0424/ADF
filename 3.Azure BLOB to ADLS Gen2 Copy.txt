@@ -1,0 +1,103 @@
+Case Study:
+
+Title: Copy data from  azure blob storage to ADLS GEN2
+
+===========================================================
+Steps to achieve above task:
+===========================================================
+1. Create resource group
+2. Create storage account for source
+		> In storage accounts, we can save data in Containers, File shares, Queues and Tables
+3. Create Storage account for sink
+4. Create ADF session
+5. Create/Define Linked Services
+6. Create Datasets for source and target
+7. Create pipeline
+8. Select activity and assign datasets to that activity
+9. Debug/Trigger
+
+==============================================================
+
+What is Linked Service ?
+
+-> Linked service in ADF is connection object that defines how ADF connects to external data source or compute resource.
+-> It stores connection information and authentication details(like account keys, service principles or managed identity) required to  access resources like 
+   Azure blob storage, ADLS Gen2 etc
+   
+   
+Analogy: A  linked service is like saving a wi-fi connection in our phone. Once it is saved, we don't need to   to type password each time we connect.
+
+================================================================
+
+Costing:
+
+-> Creating 2 storage accounts incurs cost.
+-> Linked service are not chargeable.
+-> ADF charges only when pipelines, copy activities, data flows, integration runtime are executed.
+
+====================================================================
+Components in ADF:
+
+pipeline - Carries data from source to  target.
+Linked service
+Dataset - These are pointers to the physical location of data
+activity - The action need to be performed on data.
+Dataflows - These are the actual transformations  in ADF
+triggers - Used to automate running pipeline. These  are commonly used in production environment.
+Debugs - Used to run pipeline manually. Commonly used in Testing environment.
+Integration Runtime  -  Used to connect On-premise data sources to Azure cloud environment(Oracle to Azure). Here, we use Self Hosted Integration Runtime.
+                        From cloud to cloud (AWS to Azure) , we use AutoResolve Integration Runtime.
+
+==========================================================================
+BLOB vs Data Lake:
+==========================================================================
+
+Blob Storage:
+-> Azure Blob Storage is Microsoft’s object storage solution for storing large amounts of unstructured data in a flat namespace. 
+-> It’s commonly used for backup, archiving, serving files, and general storage needs.
+-> Blob Storage is primarily designed for unstructured data
+-> Unstructured = data without a fixed schema.
+-> Examples: images, videos, PDFs, logs, backups, IoT data, audio files, etc.
+-> This is the main reason Blob is so widely used — it scales massively for unpredictable formats.
+-> But, you can also store semi-structured or structured data
+-> Semi-structured = JSON, XML, CSV, Parquet → very common in data lakes.
+-> Structured = technically you could put relational tables (e.g., export SQL data into CSV/Parquet and save it in Blob).
+-> Blob doesn’t enforce schema, so if you want to treat that data as structured, you need external systems (like ADF, Synapse, Databricks, or Power BI).
+-> Key Points
+		> Blob Storage itself doesn’t care what the data looks like — it just stores bytes as objects.
+		> But since it has no built-in schema enforcement, it’s classified as an unstructured storage service.
+		> If you want to work with structured data there, you need to define schema at read-time using external tools.
+
+
+
+ADLS Gen2:
+-> Azure Data Lake Storage Gen2 is an enhanced version of Blob Storage that combines object storage scalability with hierarchical namespace and POSIX-compliant security. 
+-> It is optimized for big data analytics and integrates natively with tools like Hadoop, Spark, and Azure Synapse.
+-> ADLS Gen2 = Blob Storage + Hierarchical Namespace + Analytics/ACL features.
+===============================================================================================================================
+
+Key Definitions:
+=======================================================
+1.   What  is object storage  ?
+-> Object storage is a flat storage system where each file is stored as an object with its data, metadata, and a unique identifier, making it highly scalable and ideal for unstructured data like images, videos, and logs.
+
+-> Let’s say you upload a file dog.jpg to Azure Blob Storage:
+	> Data: the pixels of dog.jpg.
+	> Metadata: {type: "image/jpeg", size: "2 MB", owner: "Monesh"}.
+	> Unique ID / URL:  https://mystorage.blob.core.windows.net/pets/dog.jpg
+	> Now any app can retrieve it just by using this URL — no need to know “which folder/disk” it’s on.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+2. What is Hierarchical Namespace  ?
+
+-> A namespace is just how data is organized in storage.
+-> In Blob Storage (flat namespace):
+		> Folders are virtual — just part of the blob name (e.g., folder1/file1.txt).
+		> Renaming or moving a file = copy + delete → slow & costly.
+
+-> In ADLS Gen2 (hierarchical namespace):
+		> Folders are real directories, not just text in the filename.
+		> You can manage data in a hierarchical (tree) structure → containers → folders → subfolders → files.
+		> Operations like rename/move/delete entire folders are atomic (fast, efficient).
+		> Supports POSIX-style ACLs (fine-grained permissions at folder/file level).
