@@ -1,0 +1,15 @@
+{
+	"name": "moneshadf",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d8e73a50-ed4f-4dc3-ad4e-55c0fc99f1d8",
+		"tenantId": "9e6fdc9f-9d9d-4bf5-ab9d-17a35cbfbbf3"
+	}
+}

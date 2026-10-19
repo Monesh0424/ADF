@@ -1,0 +1,24 @@
+{
+	"name": "Trigger_q3g",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Incremental_load_db2dwh",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 24,
+				"startTime": "2026-10-13T01:19:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
