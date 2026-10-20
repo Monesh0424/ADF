@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "moneshadf"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"AzureSynapseAnalytics1_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://storageaccountforetlwh.dfs.core.windows.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "moneshsqlserver.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "moneshDB"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "admin_monesh"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_server": {
+			"value": "moneshsqlserver.database.windows.net"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_database": {
+			"value": "monesh_dwh"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
+			"value": "admin_monesh"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
